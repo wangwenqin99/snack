@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style type="text/css">
+			canvas{
+				display: block;
+				border:1px solid royalblue;
+				margin:10px auto;
+			}
+	</style>
+	<script src="lib/Snake.js"></script>
+</head>
+<body>
+	<button id = "star-game">开始游戏</button>
+	<div>得分：</div>
+	<p id="score">0</p>
+	<canvas id="canvas" width="600" height="500"></canvas>
+	<script type="text/javascript">
+		var startGame = document.getElementById("star-game");
+		var score = document.getElementById("score");
+
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+		// 设定蛇的尺寸
+		var snakeWH = 20;
+		var snakeBodyColor = "gray";
+		var snakeHeadColor = "red";
+		var foodColor = "green";
+		var fps = 10;//frame percent second
+		// 声明变量，用于保存键盘的code编码值
+		var UP = 38;
+		var DOWM = 40;
+		var LEFT = 37;
+		var RIGHT = 39;
+		// 根据Snake构造函数去创建Snake对象
+		var snake = new Snake();
+		snake.draw();
+		var food = createFood();
+		var timer = null;
+		startGame.onclick = function(){
+		food.draw();
+		// 给定一个计时器,去不停地绘制小蛇
+		timer = setInterval(function(){
+			canvas.width = 600;
+			canvas.height = 500;
+			food.draw();
+			// 使得小蛇顺着某个方向移动
+			snake.move();
+			snake.draw();
+		}, 1000/fps);
+		// 设定window的键盘事件
+		window.onkeydown = function(e){
+			var code = e.keyCode;
+			if(snake.dir == LEFT && code == RIGHT){
+			}else if(snake.dir == RIGHT && code == LEFT){
+			}else if(snake.dir == UP && code == DOWM){
+			}else if(snake.dir == DOWM && code == UP){
+			}else{
+				snake.dir = e.keyCode;
+			}
+		}
+			}
+		</script>
+</body>
+</html>
